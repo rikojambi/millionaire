@@ -1,0 +1,561 @@
+/**
+ * WHO WANTS TO BE A MILLIONAIRE - MODERN EDUCATIONAL GAMESHOW THEME
+ * Touch-optimized for Smartboards, Projectors, Tablets, and Laptops.
+ */
+
+:root {
+  --bg-primary: #060a21;
+  --bg-secondary: #0c143d;
+  --bg-card: rgba(12, 20, 61, 0.85);
+  --gold-primary: #f59e0b;
+  --gold-accent: #ffd700;
+  --gold-glow: rgba(255, 215, 0, 0.45);
+  --cyan-accent: #38bdf8;
+  --blue-option: #0f1c4d;
+  --blue-option-border: #2563eb;
+  --selected-bg: #d97706;
+  --selected-border: #fbbf24;
+  --locked-bg: #ea580c;
+  --correct-bg: #15803d;
+  --correct-border: #22c55e;
+  --wrong-bg: #b91c1c;
+  --wrong-border: #ef4444;
+  --text-main: #f8fafc;
+  --text-gold: #fde047;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 50% 25%, #18286a 0%, #060a21 65%, #02030a 100%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  user-select: none; /* Prevents text selection on smartboard drag */
+}
+
+/* Allow text select inside inputs, tables, and explanations */
+input, textarea, select, .table, .accordion-body, .explanation-text {
+  user-select: text;
+}
+
+/* --- Navigation Bar --- */
+.game-navbar {
+  background: rgba(4, 7, 24, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  z-index: 1030;
+}
+
+.brand-title {
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffae00 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.35rem;
+}
+
+/* --- Touch-friendly interactive buttons --- */
+.btn-touch {
+  min-height: 52px;
+  padding: 12px 24px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+  touch-action: manipulation;
+}
+
+.btn-touch:active {
+  transform: scale(0.97);
+}
+
+.btn-millionaire-gold {
+  background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%);
+  color: #000;
+  border: 2px solid #fde047;
+  box-shadow: 0 0 18px var(--gold-glow);
+  font-weight: 800;
+}
+.btn-millionaire-gold:hover, .btn-millionaire-gold:focus {
+  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+  color: #000;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+}
+
+.btn-millionaire-blue {
+  background: linear-gradient(180deg, #1e3a8a 0%, #172554 100%);
+  color: #fff;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+}
+.btn-millionaire-blue:hover, .btn-millionaire-blue:focus {
+  background: linear-gradient(180deg, #2563eb 0%, #1e40af 100%);
+  color: #fff;
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.5);
+}
+
+/* --- HOME VIEW / SHOWCASE --- */
+.hero-wrapper {
+  padding: 40px 16px;
+  text-align: center;
+}
+
+.millionaire-logo-badge {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 20px auto;
+  border-radius: 50%;
+  border: 4px solid var(--gold-accent);
+  background: radial-gradient(circle, #1e3a8a 20%, #080d28 85%);
+  box-shadow: 0 0 35px var(--gold-glow), inset 0 0 20px rgba(255, 215, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: logoPulse 4s infinite ease-in-out;
+}
+
+.millionaire-logo-badge i {
+  font-size: 80px;
+  color: var(--gold-accent);
+  filter: drop-shadow(0 0 12px var(--gold-glow));
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    box-shadow: 0 0 30px var(--gold-glow), inset 0 0 20px rgba(255, 215, 0, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.7), inset 0 0 30px rgba(255, 215, 0, 0.6);
+    transform: scale(1.03);
+  }
+}
+
+.home-title {
+  font-size: 2.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.15;
+  color: #fff;
+  text-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
+}
+
+.home-subtitle {
+  color: var(--gold-accent);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.menu-buttons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 580px;
+  margin: 30px auto 0 auto;
+}
+
+/* --- GAME SHOW ARENA (GAME VIEW) --- */
+.game-arena-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 16px;
+  flex: 1;
+}
+
+.game-main-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+/* Lifeline & Header Bar */
+.game-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  padding: 14px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lifeline-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #1e3a8a, #0b1536);
+  border: 2px solid #38bdf8;
+  color: #fde047;
+  font-size: 1.25rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+.lifeline-btn:active {
+  transform: scale(0.92);
+}
+
+.lifeline-btn.used {
+  background: #1e293b !important;
+  border-color: #475569 !important;
+  color: #64748b !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+  position: relative;
+  opacity: 0.5;
+}
+
+.lifeline-btn.used::after {
+  content: "✕";
+  position: absolute;
+  font-size: 2rem;
+  color: #ef4444;
+  font-weight: 900;
+}
+
+/* Circular / Linear Countdown Timer */
+.timer-container {
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timer-seconds-badge {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fbbf24;
+  min-width: 45px;
+  text-align: center;
+}
+
+/* Question Box (Hexagon-styled banner) */
+.question-box {
+  background: linear-gradient(180deg, #111d4d 0%, #080f2d 100%);
+  border: 3px solid #38bdf8;
+  border-radius: 20px;
+  padding: 24px 30px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.4), inset 0 0 15px rgba(56, 189, 248, 0.2);
+  text-align: center;
+  position: relative;
+}
+
+.question-text {
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.question-img-wrapper {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.question-img-wrapper img {
+  max-height: 220px;
+  max-width: 100%;
+  border-radius: 12px;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  background: #020617;
+}
+
+/* Option Buttons (A, B, C, D) */
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.btn-option {
+  min-height: 72px;
+  padding: 14px 20px;
+  background: linear-gradient(180deg, #0e1942 0%, #070d26 100%);
+  border: 2px solid #2563eb;
+  border-radius: 16px;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  touch-action: manipulation;
+}
+
+.btn-option:active {
+  transform: scale(0.98);
+}
+
+.option-prefix {
+  color: var(--gold-accent);
+  font-weight: 900;
+  font-size: 1.35rem;
+  margin-right: 14px;
+  min-width: 32px;
+}
+
+/* Option States */
+.btn-option.selected {
+  background: linear-gradient(180deg, #b45309 0%, #78350f 100%) !important;
+  border-color: #fde047 !important;
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.8) !important;
+  color: #ffffff !important;
+}
+
+.btn-option.final-locked {
+  background: linear-gradient(180deg, #ea580c 0%, #9a3412 100%) !important;
+  border-color: #fed7aa !important;
+  animation: pulseLock 1s infinite alternate;
+  color: #ffffff !important;
+}
+
+@keyframes pulseLock {
+  0% { box-shadow: 0 0 15px rgba(234, 88, 12, 0.7); }
+  100% { box-shadow: 0 0 35px rgba(234, 88, 12, 1); }
+}
+
+.btn-option.correct {
+  background: linear-gradient(180deg, #15803d 0%, #14532d 100%) !important;
+  border-color: #4ade80 !important;
+  box-shadow: 0 0 30px rgba(74, 222, 128, 0.9) !important;
+  color: #ffffff !important;
+}
+
+.btn-option.wrong {
+  background: linear-gradient(180deg, #b91c1c 0%, #7f1d1d 100%) !important;
+  border-color: #f87171 !important;
+  box-shadow: 0 0 30px rgba(248, 113, 113, 0.9) !important;
+  color: #ffffff !important;
+}
+
+.btn-option.hidden-option {
+  opacity: 0.15 !important;
+  text-decoration: line-through;
+  pointer-events: none !important;
+}
+
+/* Lock In Action Prompt */
+.lock-in-bar {
+  background: rgba(15, 23, 42, 0.95);
+  border: 2px solid #fbbf24;
+  border-radius: 14px;
+  padding: 14px 20px;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+  animation: slideUp 0.25s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- PRIZE LADDER SIDEBAR --- */
+.ladder-sidebar {
+  width: 290px;
+  background: var(--bg-card);
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  border-radius: 18px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.ladder-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.ladder-item .level-num {
+  width: 28px;
+  text-align: right;
+  margin-right: 12px;
+  color: #64748b;
+}
+
+.ladder-item .level-prize {
+  flex: 1;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.ladder-item.safe-level {
+  color: #ffffff;
+  font-weight: 800;
+  background: rgba(30, 58, 138, 0.4);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.ladder-item.safe-level .level-num {
+  color: #fde047;
+}
+
+.ladder-item.current-level {
+  background: linear-gradient(90deg, #d97706 0%, #b45309 100%) !important;
+  color: #ffffff !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+  transform: scale(1.02);
+}
+
+.ladder-item.current-level .level-num {
+  color: #ffffff !important;
+}
+
+.ladder-item.passed-level {
+  color: #4ade80;
+  opacity: 0.8;
+}
+
+/* --- AUDIENCE POLL BARS --- */
+.poll-bar-track {
+  height: 220px;
+  background: #0f172a;
+  border-radius: 12px;
+  border: 2px solid #334155;
+  display: flex;
+  align-items: flex-end;
+  padding: 4px;
+  position: relative;
+}
+
+.poll-bar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #38bdf8 0%, #1e40af 100%);
+  border-radius: 8px;
+  transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}
+
+/* --- GENERAL UTILITIES --- */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.victory-glow {
+  text-shadow: 0 0 25px rgba(255, 215, 0, 0.9), 0 0 50px rgba(255, 174, 0, 0.7);
+}
+
+/* --- RESPONSIVE OPTIMIZATIONS FOR TABLET, SMARTBOARD & MOBILE --- */
+@media (max-width: 1024px) {
+  .game-arena-container {
+    flex-direction: column-reverse;
+  }
+  .ladder-sidebar {
+    width: 100%;
+    max-height: 180px;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .ladder-item {
+    min-width: 160px;
+    margin-right: 8px;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2rem;
+  }
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+  .question-text {
+    font-size: 1.25rem;
+  }
+  .btn-option {
+    min-height: 60px;
+    font-size: 1.1rem;
+  }
+}
+
+/* --- PRINT EVALUATION STYLES --- */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .game-navbar, .btn, .no-print {
+    display: none !important;
+  }
+  .accordion-item {
+    background: #ffffff !important;
+    border: 1px solid #ccc !important;
+    color: #000000 !important;
+    page-break-inside: avoid;
+  }
+  .accordion-collapse {
+    display: block !important;
+  }
+  .accordion-button {
+    background: #f1f5f9 !important;
+    color: #000000 !important;
+  }
+  .accordion-body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+}

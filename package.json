@@ -1,0 +1,22 @@
+{
+  "name": "who-wants-to-be-a-millionaire-edukasi",
+  "version": "1.0.0",
+  "description": "Aplikasi Web Game Edukasi Who Wants to Be a Millionaire untuk Kelas Interaktif",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "game-show",
+    "millionaire",
+    "education",
+    "quiz",
+    "interactive-classroom",
+    "touchscreen",
+    "smartboard"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "type": "commonjs"
+}
